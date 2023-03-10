@@ -1,6 +1,4 @@
 const inputEl = document.querySelector("input");
-const buttonEl = document.querySelector("button");
-// const timerEl = document.querySelector("span");
 // Timer
 const hoursEl = document.querySelector(".hours");
 const minutesEl = document.querySelector(".minutes");
@@ -30,6 +28,7 @@ const createTimerAnimator = () => {
   };
 };
 
+// Функция, запускающая таймер
 const startTimer = () => {
   interval = setInterval(() => {
     if (pause) {
@@ -43,6 +42,7 @@ const startTimer = () => {
   }, 1000);
 };
 
+// Функция, обновляющая отображение таймера
 const updateInputs = () => {
   const hoursValue = Math.floor(seconds / 60 / 60).toLocaleString("en-US", {
     minimumIntegerDigits: 2,
@@ -69,7 +69,7 @@ inputEl.addEventListener("input", () => {
   // оставались только числа
 });
 
-buttonEl.addEventListener("click", () => {
+btnStart.addEventListener("click", () => {
   seconds = Number(inputEl.value);
   if (seconds <= 0) {
     return;
