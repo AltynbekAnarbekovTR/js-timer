@@ -32,7 +32,6 @@ const createTimerAnimator = () => {
 
 const startTimer = () => {
   interval = setInterval(() => {
-    console.log(seconds);
     if (pause) {
       return;
     }
@@ -57,7 +56,6 @@ const updateInputs = () => {
     minimumIntegerDigits: 2,
     useGrouping: false,
   });
-  console.log(hoursValue);
   hoursEl.innerHTML = hoursValue;
   minutesEl.innerHTML = minutesValue;
   secondsEl.innerHTML = secondssValue;
@@ -76,14 +74,12 @@ buttonEl.addEventListener("click", () => {
   if (seconds <= 0) {
     return;
   }
-  console.log("Seconds:", seconds);
   animateTimer(seconds);
 
   inputEl.value = "";
 });
 
 btnPause.addEventListener("click", () => {
-  console.log("pause: ", pause);
   pause = !pause;
   if (pause) {
     btnPause.innerHTML = "Resume";
