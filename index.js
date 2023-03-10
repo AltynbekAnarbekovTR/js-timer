@@ -49,7 +49,7 @@ const updateInputs = () => {
     minimumIntegerDigits: 2,
     useGrouping: false,
   });
-  const minutesValue = Math.floor(seconds / 60).toLocaleString("en-US", {
+  const minutesValue = Math.floor((seconds / 60) % 60).toLocaleString("en-US", {
     minimumIntegerDigits: 2,
     useGrouping: false,
   });
@@ -66,6 +66,7 @@ const updateInputs = () => {
 const animateTimer = createTimerAnimator();
 
 inputEl.addEventListener("input", () => {
+  inputEl.value = inputEl.value.replace(/\D/g, "");
   // Очистите input так, чтобы в значении
   // оставались только числа
 });
