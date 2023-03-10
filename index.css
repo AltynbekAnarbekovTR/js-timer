@@ -1,0 +1,31 @@
+.timer {
+    display: flex;
+}
+
+/* Timer */
+.hours {
+    
+}
+.minutes {
+    
+}
+.seconds {
+    
+}
+
+/* Buttons */
+.btn-start-resume {
+    /* display: none; */
+}
+.btn-pause {
+    display: none;
+}
+.btn-stop {
+    display: none;
+}
+.btn-reset {
+    display: none;
+}
+
+
+
