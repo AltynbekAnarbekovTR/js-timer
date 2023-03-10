@@ -10,22 +10,36 @@
 </head>
 
 <body>
-  <div>
-    <input placeholder="Seconds" type="number" />
+  <div class="container">
+    <h1>Timer</h1>
+    <div>
+      <input placeholder="Seconds" type="text" />
+    </div>
+    <div class="buttons">
+      <button class="btn-start-resume">Start</button>
+      <button class="btn-pause">Pause</button>
+      <button class="btn-stop">Stop</button>
+      <button class="btn-reset">Reset</button>
+    </div>
+    <br />
+    <br />
+    <div class="timer">
+      <div class="timer__hours">
+        <div class="hours time">00</div>
+        <p>Hours</p>
+      </div>
+      <div class="timer__minutes">
+        <div class="minutes time">00</div>
+        <p>Minutes</p>
+      </div>
+      <div class="timer__seconds">
+        <div class="seconds time">00</div>
+        <p>Seconds</p>
+      </div>
+
+    </div>
   </div>
-  <div class="buttons">
-    <button class="btn-start-resume">Start</button>
-    <button class="btn-pause">Pause</button>
-    <button class="btn-stop">Stop</button>
-    <button class="btn-reset">Reset</button>
-  </div>
-  <br />
-  <br />
-  <div class="timer">
-    <div class="hours">Hours</div>
-    <div class="minutes">Minutes</div>
-    <div class="seconds">Seconds</div>
-  </div>
+
 
 
   <script src="./index.js"></script>

@@ -1,7 +1,7 @@
 const inputEl = document.querySelector("input");
 const buttonEl = document.querySelector("button");
 // const timerEl = document.querySelector("span");
-// Timers
+// Timer
 const hoursEl = document.querySelector(".hours");
 const minutesEl = document.querySelector(".minutes");
 const secondsEl = document.querySelector(".seconds");
@@ -13,12 +13,16 @@ const btnReset = document.querySelector(".btn-reset");
 // Variables
 let pause = false;
 let seconds = 0;
+let secondsInitial = 0;
+let interval;
 
 // Напишите реализацию createTimerAnimator
 // который будет анимировать timerEl
 const createTimerAnimator = () => {
   return (seconds) => {
-    startTimer(seconds);
+    secondsInitial = seconds;
+    pause = false;
+    startTimer();
     btnStart.style.display = "none";
     btnPause.style.display = "inline-block";
     btnStop.style.display = "inline-block";
@@ -26,28 +30,37 @@ const createTimerAnimator = () => {
   };
 };
 
-const startTimer = (seconds) => {
-  let interval = setInterval(() => {
-    console.log("here");
-    if (pause === true) {
+const startTimer = () => {
+  interval = setInterval(() => {
+    console.log(seconds);
+    if (pause) {
       return;
     }
     seconds--;
-    updateInputs(seconds);
+    updateInputs();
     if (seconds <= 0) {
       clearInterval(interval);
     }
   }, 1000);
 };
 
-const updateInputs = (totalSeconds) => {
-  const hours = Math.floor(totalSeconds / 60 / 60);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = Math.floor(totalSeconds % 60);
-
-  hoursEl.innerHTML = hours;
-  minutesEl.innerHTML = minutes;
-  secondsEl.innerHTML = seconds;
+const updateInputs = () => {
+  const hoursValue = Math.floor(seconds / 60 / 60).toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  const minutesValue = Math.floor(seconds / 60).toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  const secondssValue = Math.floor(seconds % 60).toLocaleString("en-US", {
+    minimumIntegerDigits: 2,
+    useGrouping: false,
+  });
+  console.log(hoursValue);
+  hoursEl.innerHTML = hoursValue;
+  minutesEl.innerHTML = minutesValue;
+  secondsEl.innerHTML = secondssValue;
 };
 
 const animateTimer = createTimerAnimator();
@@ -58,14 +71,18 @@ inputEl.addEventListener("input", () => {
 });
 
 buttonEl.addEventListener("click", () => {
-  const seconds = Number(inputEl.value);
-
+  seconds = Number(inputEl.value);
+  if (seconds <= 0) {
+    return;
+  }
+  console.log("Seconds:", seconds);
   animateTimer(seconds);
 
   inputEl.value = "";
 });
 
 btnPause.addEventListener("click", () => {
+  console.log("pause: ", pause);
   pause = !pause;
   if (pause) {
     btnPause.innerHTML = "Resume";
@@ -74,3 +91,25 @@ btnPause.addEventListener("click", () => {
     btnPause.innerHTML = "Pause";
   }
 });
+
+btnReset.addEventListener("click", () => {
+  seconds = secondsInitial;
+  updateInputs();
+});
+
+btnStop.addEventListener("click", () => {
+  stopTimer();
+  seconds = secondsInitial;
+  updateInputs();
+  pause = false;
+  btnPause.innerHTML = "Pause";
+
+  btnStart.style.display = "inline-block";
+  btnPause.style.display = "none";
+  btnStop.style.display = "none";
+  btnReset.style.display = "none";
+});
+
+const stopTimer = () => {
+  clearInterval(interval);
+};
